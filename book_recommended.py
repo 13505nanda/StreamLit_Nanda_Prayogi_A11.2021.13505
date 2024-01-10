@@ -23,14 +23,16 @@ merged_df.dropna(inplace=True)
 merged_df = merged_df.sort_values(by=['bestsellers-rank'], ascending=False)
 
 # Text preprocessing
-import nltk
-
 # Download NLTK data (stopwords) if not already downloaded
 try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
     nltk.download('stopwords')
 
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
 stop_words = nltk.corpus.stopwords.words('english')
 
 def normalize_document(doc):
