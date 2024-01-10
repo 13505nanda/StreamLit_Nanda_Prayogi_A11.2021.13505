@@ -5,3 +5,4 @@ scikit-learn
 pip==22.3.1
 nltk
 gensim
+contractions
