@@ -23,16 +23,24 @@ merged_df.dropna(inplace=True)
 merged_df = merged_df.sort_values(by=['bestsellers-rank'], ascending=False)
 
 # Text preprocessing
-# Download NLTK data (stopwords) if not already downloaded
+# Unduh data NLTK (stopwords dan model tokenisasi Punkt) jika belum diunduh
 try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
-    nltk.download('stopwords')
+    nltk.download('stopwords', download_dir='/root/nltk_data')
 
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
-    nltk.download('punkt')
+    nltk.download('punkt', download_dir='/root/nltk_data')
+
+# Timpa verifikasi sertifikat SSL (jika diperlukan)
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
 stop_words = nltk.corpus.stopwords.words('english')
 
 def normalize_document(doc):
